@@ -1,4 +1,4 @@
-/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -26,38 +26,41 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#ifndef __MSG_TASK__
+#define __MSG_TASK__
 
-#ifndef __LOC_DELAY_H__
-#define __LOC_DELAY_H__
+#include <stdbool.h>
+#include <ctype.h>
+#include <string.h>
+#include <pthread.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-#include<pthread.h>
-#include "log_util.h"
+namespace loc_core {
 
-/*
-  Return values:
-  Success = 0
-  Failure = Non zero
-*/
-typedef void(*loc_timer_callback)(void *user_data, int result);
+struct LocMsg {
+    inline LocMsg() {}
+    inline virtual ~LocMsg() {}
+    virtual void proc() const = 0;
+    inline virtual void log() const {}
+};
 
+class MsgTask {
+public:
+    typedef void* (*tStart)(void*);
+    typedef pthread_t (*tCreate)(const char* name, tStart start, void* arg);
+    typedef int (*tAssociate)();
+    MsgTask(tCreate tCreator, const char* threadName);
+    MsgTask(tAssociate tAssociator, const char* threadName);
+    ~MsgTask();
+    void sendMsg(const LocMsg* msg) const;
 
-/*
-  Returns the handle, which can be used to stop the timer
-*/
-void* loc_timer_start(unsigned int delay_msec,
-                      loc_timer_callback,
-                      void* user_data);
+private:
+    const void* mQ;
+    tAssociate mAssociator;
+    MsgTask(const void* q, tAssociate associator);
+    static void* loopMain(void* copy);
+    void createPThread(const char* name);
+};
 
-/*
-  handle becomes invalid upon the return of the callback
-*/
-void loc_timer_stop(void* handle);
+} // namespace loc_core
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
-#endif //__LOC_DELAY_H__
+#endif //__MSG_TASK__

@@ -1,15 +1,14 @@
 #
-# system.prop for Asus T00N
+# system.prop for Asus T00P
 #
 
-ro.sf.lcd_density=440
-ro.sf.pad_density=240
+ro.sf.lcd_density=320
 
 # Ril
 rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 persist.radio.add_power_save=1
 persist.radio.apm_sim_not_pwdn=1
-persist.radio.force_nw_search=1
+persist.radio.use_se_table_only=1
 
 rol.ril.ext.ecclist=112,911,999,110,122,119,120,000,08,118
 
@@ -17,10 +16,8 @@ rol.ril.ext.ecclist=112,911,999,110,122,119,120,000,08,118
 persist.gps.qc_nlp_in_use=0
 ro.gps.agps_provider=1
 
-# Sensors
-ro.qc.sdk.sensors.gestures=true
-ro.qc.sdk.gestures.camera=false
-ro.qc.sdk.camera.facialproc=true
+ro.qc.sdk.audio.ssr=false
+ro.qc.sdk.audio.fluencetype=fluence
 
 # Sensor debugging
 # Valid settings (and presumably what they mean):

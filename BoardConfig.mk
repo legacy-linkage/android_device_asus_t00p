@@ -18,22 +18,16 @@
 -include device/asus/common/BoardConfigCommon.mk
 
 # Vendor Init
-TARGET_OTA_ASSERT_DEVICE := t00n,t00d,ASUS_T00N,ASUS_T00D
-TARGET_INIT_VENDOR_LIB := libinit_t00n
-TARGET_RECOVERY_DEVICE_MODULES := libinit_t00n
-
-
-# Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := device/asus/t00n
+TARGET_OTA_ASSERT_DEVICE := t00p,ASUS_T00P
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := MSM8974
+TARGET_BOOTLOADER_BOARD_NAME := MSM8226
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
 # Platform
-TARGET_BOARD_PLATFORM := msm8974
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
+TARGET_BOARD_PLATFORM := msm8226
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno305
 
 # Architecture
 TARGET_ARCH := arm
@@ -44,14 +38,13 @@ TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := krait
 
 # Kernel
-BOARD_CUSTOM_BOOTIMG_MK := device/asus/t00n/mkbootimg.mk
-BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_BASE := 0x00008000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02500000 --tags_offset 0x01e00000
-TARGET_KERNEL_CONFIG := pf500kl-perf_defconfig
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
-TARGET_KERNEL_SOURCE := kernel/asus/msm8974
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
+TARGET_KERNEL_CONFIG := a500kl-perf_defconfig
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 earlyprintk androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x37 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
+TARGET_KERNEL_SOURCE := kernel/asus/msm8226
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
 USE_CLANG_PLATFORM_BUILD := true
@@ -75,9 +68,6 @@ TARGET_RIL_VARIANT := caf
 TARGET_PROVIDES_WCNSS_QMI := true
 TARGET_HAVE_QC_PERF := false
 
-# Charger
-BOARD_HEALTHD_CUSTOM_CHARGER_RES := device/asus/t00n/charger/images
-
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_HWDEP_CAL := true
@@ -93,15 +83,7 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_SMD_TTY := true
 BLUETOOTH_HCI_USE_MCT := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/asus/t00n/bluetooth 
-
-# CM Hardware
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := device/asus/t00n/cmhw/
-TARGET_TAP_TO_WAKE_NODE := "/sys/android_touch/doubletap2wake"
-
-# Charger
-BOARD_CHARGER_RES := device/asus/t00n/charger/images
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/asus/t00p/bluetooth
 
 # Graphics
 HAVE_ADRENO_SOURCE := false
@@ -112,7 +94,7 @@ TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -145,7 +127,7 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 2136746229
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 11596787712
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/asus/t00n/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/asus/t00p/recovery.fstab
 TARGET_INCREMENTAL_OTA_VERBATIM_FILES := /system/priv-app/OneTimeInitializer/OneTimeInitializer.apk /system/priv-app/OneTimeInitializer/arm/OneTimeInitializer.odex 
 
 # TWRP specific build flags
@@ -170,9 +152,6 @@ TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_BRIGHTNESS_PATH := "/sys/class/leds/wled:backlight/brightness"
 TW_SECONDARY_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 
-# NFC
-BOARD_NFC_CHIPSET := pn547
-
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-smd"
 
@@ -192,13 +171,10 @@ BOARD_USES_QC_TIME_SERVICES := true
 # PowerHal
 TARGET_POWERHAL_VARIANT := qcom
 
-# Override healthd HAL
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm8974
-
 # SELinux policies
 # qcom sepolicy
 include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
-        device/asus/t00n/sepolicy
+        device/asus/t00p/sepolicy
 

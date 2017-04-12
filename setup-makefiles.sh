@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VENDOR=asus
-DEVICE=t00n
+DEVICE=t00p
 OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/asus-blobs.mk
 
@@ -25,8 +25,8 @@ PRODUCT_COPY_FILES += \\
 EOF
 
 LINEEND=" \\"
-COUNT=`cat proprietary-blobs.txt | grep -v ^# | grep -v ^$ | wc -l | awk {'print $1'}`
-for FILE in `cat proprietary-blobs.txt | grep -v ^# | grep -v ^$ | sed -e 's#^/system/##g'`; do
+COUNT=`cat proprietary-files.txt | grep -v ^# | grep -v ^$ | wc -l | awk {'print $1'}`
+for FILE in `cat proprietary-files.txt | grep -v ^# | grep -v ^$ | sed -e 's#^/system/##g'`; do
     COUNT=`expr $COUNT - 1`
     if [ $COUNT = "0" ]; then
         LINEEND=""
@@ -71,8 +71,7 @@ PRODUCT_PACKAGES += \\
     libqmi_client_qmux \\
     libdsutils \\
     libmdmdetect \\
-    libqmi_cci \\
-    libwpa_qmi_eap_proxy
+    libqmi_cci
 
 #Asus Apps
 PRODUCT_PACKAGES += \\
@@ -120,7 +119,7 @@ EOF
 
 LOCAL_PATH := \$(call my-dir)
 
-ifeq (\$(TARGET_BOARD_PLATFORM),msm8974)
+ifeq (\$(TARGET_BOARD_PLATFORM),msm8226)
 
 ifeq (\$(QCPATH),)
 

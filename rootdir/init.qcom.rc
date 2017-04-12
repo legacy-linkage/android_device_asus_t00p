@@ -1,7 +1,6 @@
 # Copyright (c) 2015, Quarx2k.
 
 import /init.qcom.usb.rc
-import /init.qcom.power.rc
 
 on early-init
     chown system system /sys/kernel/debug/kgsl/proc
@@ -188,10 +187,6 @@ on post-fs-data
     #write /proc/asusdebug get_asdf_log
 
     mkdir /data/media 0770 media_rw media_rw
-
-    # NFC: create data/nfc for nv storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
 
     #  bluetooth
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -496,11 +491,6 @@ service mpdecision /system/bin/mpdecision --avg_comp
    group system
    disabled
 
-service thermal-serivce /system/bin/sh /system/etc/init.asus.thermal_conf.sh
-   class core
-   user root
-   oneshot
-
 service thermal-engine /system/vendor/bin/thermal-engine
    class main
    user root
@@ -559,10 +549,3 @@ service ssr_diag /system/bin/ssr_diag
     disabled
     user system
     group system
-
-service onPadEvtChg /system/bin/sh  /system/etc/onPadEventChanged.sh
-    class core
-    user root
-    oneshot
-    disabled
-

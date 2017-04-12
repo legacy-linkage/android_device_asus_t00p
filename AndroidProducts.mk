@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/t00n.mk
+    $(LOCAL_DIR)/t00p.mk

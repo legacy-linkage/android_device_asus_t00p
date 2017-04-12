@@ -13,8 +13,8 @@
 # limitations under the License.
 
 # Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
@@ -23,20 +23,17 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit from device
-$(call inherit-product, device/asus/t00n/t00n.mk)
+$(call inherit-product, device/asus/t00p/t00p.mk)
 
-# Enhanced NFC
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
-
-PRODUCT_NAME := cm_t00n
-PRODUCT_DEVICE := t00n
+PRODUCT_NAME := cm_t00p
+PRODUCT_DEVICE := t00p
 PRODUCT_MANUFACTURER := asus
-PRODUCT_MODEL := ASUS_T00N
+PRODUCT_MODEL := ASUS_T00P
 PRODUCT_BRAND := asus
 
-TARGET_VENDOR_PRODUCT_NAME := ASUS_T00N
-TARGET_VENDOR_DEVICE_NAME := ASUS_T00N
-PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=ASUS_T00N PRODUCT_NAME=WW_PadFone
+TARGET_VENDOR_PRODUCT_NAME := JP_Phone
+TARGET_VENDOR_DEVICE_NAME := ASUS_T00P
+PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=ASUS_T00P PRODUCT_NAME=JP_Phone
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT=asus/WW_PadFone/ASUS_T00N:6.0/MRA58K/2256973:user/release-keys \
-    PRIVATE_BUILD_DESC="WW_PadFone-user 6.0 MRA58K 2256973 release-keys"
+    BUILD_FINGERPRINT=asus/JP_Phone/ASUS_T00P:5.0/LRX21M/JP_Phone-12.4.5.57-20150922:user/release-keys \
+    PRIVATE_BUILD_DESC="JP_Phone-user 5.0 LRX21M JP_Phone-12.4.5.57-20150922 release-keys"

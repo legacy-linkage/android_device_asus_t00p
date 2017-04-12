@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-ifneq ($(filter t00n,$(TARGET_DEVICE)),)
+ifneq ($(filter t00p,$(TARGET_DEVICE)),)
 
 LOCAL_PATH := $(call my-dir)
 
@@ -23,12 +23,10 @@ include $(call all-makefiles-under,$(LOCAL_PATH))
 include $(CLEAR_VARS)
 
 # Create links for audcal data files
-$(shell mkdir -p $(TARGET_OUT)/etc/firmware/wcd9320; \
-	ln -sf /data/misc/audio/wcd9320_anc.bin \
-		$(TARGET_OUT)/etc/firmware/wcd9320/wcd9320_anc.bin;\
+$(shell mkdir -p $(TARGET_OUT)/etc/firmware/wcd9306; \
+	ln -sf /data/misc/audio/wcd9306_anc.bin \
+		$(TARGET_OUT)/etc/firmware/wcd9306/wcd9306_anc.bin;\
 	ln -sf /data/misc/audio/mbhc.bin \
-		$(TARGET_OUT)/etc/firmware/wcd9320/wcd9320_mbhc.bin; \
-	ln -sf /data/misc/audio/wcd9320_mad_audio.bin \
-		$(TARGET_OUT)/etc/firmware/wcd9320/wcd9320_mad_audio.bin)
+		$(TARGET_OUT)/etc/firmware/wcd9306/wcd9306_mbhc.bin)
 
 endif
