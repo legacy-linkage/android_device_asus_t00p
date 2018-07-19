@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+export ASUS_BUILD_PROJECT ?= A500KL
+
 # inherit from asus common
 -include device/asus/common/BoardConfigCommon.mk
 
